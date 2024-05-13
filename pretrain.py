@@ -34,7 +34,7 @@ transform = transforms.Compose([
 ])
 
 # 加载训练集
-train_dataset = datasets.ImageFolder(root='D:/StudentBehavior/datasets/images/pretrain', transform=transform)
+train_dataset = datasets.ImageFolder(root='../pretrain', transform=transform)
 train_loader = DataLoader(train_dataset, batch_size=batch_size, shuffle=True)
 
 # 定义模型、损失函数和优化器
