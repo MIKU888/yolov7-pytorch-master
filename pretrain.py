@@ -3,12 +3,12 @@ import torch.nn as nn
 import torch.optim as optim
 from torch.utils.data import DataLoader
 from torchvision import transforms, datasets
-from nets.yolo_unet import YoloUnet  
+from nets.yolo_unet import YoloUnet
 
 # 设定超参数
-num_epochs = 10
+num_epochs = 100
 learning_rate = 0.001
-batch_size = 4
+batch_size = 64
 
 
 def getMask(x, maskRatio):
@@ -60,7 +60,8 @@ for epoch in range(num_epochs):
         optimizer.step()  # 更新权重
 
         running_loss += loss.item() * inputs.size(0)
-        print(i)
+        if i % 10 == 0:
+            print(i)
     epoch_loss = running_loss / len(train_loader.dataset)
     print(f'Epoch {epoch + 1}/{num_epochs}, Loss: {epoch_loss:.4f}')
 
