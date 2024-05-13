@@ -50,9 +50,9 @@ for epoch in range(num_epochs):
     running_loss = 0.0
     for i, data in enumerate(train_loader):
         inputs = data[0].to(device)
-        print(inputs.shape)
+
         mask = getMask(inputs, 0.3)
-        print(mask.shape)
+
         optimizer.zero_grad()  # 梯度清零
         outputs = model(mask)  # 前向传播
         loss = criterion(outputs * (1 - mask), inputs * (1 - mask))  # 计算损失
@@ -60,7 +60,7 @@ for epoch in range(num_epochs):
         optimizer.step()  # 更新权重
 
         running_loss += loss.item() * inputs.size(0)
-
+        print(i)
     epoch_loss = running_loss / len(train_loader.dataset)
     print(f'Epoch {epoch + 1}/{num_epochs}, Loss: {epoch_loss:.4f}')
 
